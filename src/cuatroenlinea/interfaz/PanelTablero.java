@@ -47,7 +47,7 @@ public class PanelTablero extends JPanel implements ActionListener{
 		{
 			for(int j = 0; j < VideoJuego.MAX_COLUMNAS; j++)
 			{
-				fichas[i][j] = new JTextField("" + i + " - " + j);
+				fichas[i][j] = new JTextField();
 				fichas[i][j].setEditable(false);
 				fichas[i][j].setBackground(new Color(0, 68, 95));
 				fichas[i][j].setBorder(BorderFactory.createLineBorder(new Color(0, 0, 0)));
@@ -73,6 +73,13 @@ public class PanelTablero extends JPanel implements ActionListener{
 		}
 		fichas[pX][pY].setFont(new Font("Arial", Font.BOLD,90));
 		fichas[pX][pY].setHorizontalAlignment(JTextField.CENTER);
+	}
+	
+	public void colorearFichasGanadoras(Ficha[] pFicha)
+	{
+		for (int i = 0; i < pFicha.length; i++) {
+			fichas[pFicha[i].getPosX()][pFicha[i].getPosY()].setBackground(Color.GREEN);
+		}
 	}
 	
 	@Override
@@ -124,6 +131,7 @@ public class PanelTablero extends JPanel implements ActionListener{
 		{
 			if(ven.vVerificarJugada(new Ficha(ficha, valor, jugador)))
 			{
+				colorearFichasGanadoras(ven.vDarFichasGanadoras());
 				JOptionPane.showMessageDialog(this, "¡Ha ganado el jugador " + jugador + "!");
 			}else {
 				ven.vCambiarJugador();

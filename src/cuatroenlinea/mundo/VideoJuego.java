@@ -1,5 +1,7 @@
 package cuatroenlinea.mundo;
 
+import java.util.ArrayList;
+
 public class VideoJuego {
 
 	
@@ -12,12 +14,15 @@ public class VideoJuego {
 	
 	private int jugadorActual;
 	
+	private Ficha[] fichasGanadoras;
+	
 	private boolean juegoTerminado;
 	
 	public Ficha[][] tablero;
 	
 	public VideoJuego() {
 		
+		fichasGanadoras = new Ficha[4]; 
 		jugadorActual = (int) Math.floor(Math.random()*(2-1+1)+1); 
 		juegoTerminado = false;
 		tablero = new Ficha[MAX_FILAS][MAX_COLUMNAS];
@@ -29,6 +34,11 @@ public class VideoJuego {
 			}
 		}
 		
+	}
+	
+	public Ficha[] darFichasGanadoras()
+	{
+		return fichasGanadoras;
 	}
 	
 	public void cambiarJugador()
@@ -91,6 +101,7 @@ public class VideoJuego {
 		{
 			if(tablero[pFila][columna].getJugador() == pJugador)
 			{
+				fichasGanadoras[contador] = new Ficha(pFila, columna, pJugador);
 				contador++;
 				if(contador == 4)
 				{
@@ -114,6 +125,7 @@ public class VideoJuego {
 		{
 			if(tablero[fila][pColumna].getJugador() == pJugador)
 			{
+				fichasGanadoras[contador] = new Ficha(fila, pColumna, pJugador);
 				contador++;
 				if(contador == 4) return true;
 			}else
@@ -154,9 +166,9 @@ public class VideoJuego {
 		int contador = 0;
 		while(fila != MAX_FILAS && colm != MAX_COLUMNAS)
 		{
-			System.out.println(fila + "-" +  colm);
 			if(tablero[fila][colm].getJugador() == pFicha.getJugador())
 			{
+				fichasGanadoras[contador] = new Ficha(fila, colm, pFicha.getJugador());
 				contador++;
 				if(contador == 4) return true;
 			}
@@ -189,10 +201,12 @@ public class VideoJuego {
 		Ficha fich = darPrimeraFichaLateralI(pFicha.getPosX(), pFicha.getPosY());
 		int fila = fich.getPosX(), colm = fich.getPosY();
 		int contador = 0;
-		while(fila != MAX_FILAS && colm != 0)
+		while(fila != MAX_FILAS && colm != -1)
 		{
+			System.out.println(fila + "-" +  colm);
 			if(tablero[fila][colm].getJugador() == pFicha.getJugador())
 			{
+				fichasGanadoras[contador] = new Ficha(fila, colm, pFicha.getJugador());
 				contador++;
 				if(contador == 4) return true;
 			}

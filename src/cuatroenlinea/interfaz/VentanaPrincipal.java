@@ -42,9 +42,13 @@ public class VentanaPrincipal extends JFrame {
 		return videoJuego.verificarJugadaJugador(pFicha);
 	}
 	
+	public Ficha[] vDarFichasGanadoras() {
+		return videoJuego.darFichasGanadoras();
+	}
+	
 	public static void main(String[] args) {
 		VentanaPrincipal ven = new VentanaPrincipal();
-		ven.setSize(new Dimension(600, 600));
+		ven.setSize(new Dimension(1000, 600));
 		ven.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		ven.setResizable(false);
 		ven.setTitle("Cuatro en linea, by RH#0001");
