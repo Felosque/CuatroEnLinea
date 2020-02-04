@@ -15,10 +15,12 @@ public class VentanaPrincipal extends JFrame {
 	private VideoJuego videoJuego;
 	
 	public VentanaPrincipal() {
+		
+		videoJuego = new VideoJuego();
+		
 		panelTablero = new PanelTablero(this);
 		add(panelTablero, BorderLayout.CENTER);
 		
-		videoJuego = new VideoJuego();
 	}
 	
 	
@@ -48,7 +50,7 @@ public class VentanaPrincipal extends JFrame {
 	
 	public static void main(String[] args) {
 		VentanaPrincipal ven = new VentanaPrincipal();
-		ven.setSize(new Dimension(1000, 600));
+		ven.setSize(new Dimension(800, 600));
 		ven.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		ven.setResizable(false);
 		ven.setTitle("Cuatro en linea, by RH#0001");

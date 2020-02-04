@@ -203,7 +203,6 @@ public class VideoJuego {
 		int contador = 0;
 		while(fila != MAX_FILAS && colm != -1)
 		{
-			System.out.println(fila + "-" +  colm);
 			if(tablero[fila][colm].getJugador() == pFicha.getJugador())
 			{
 				fichasGanadoras[contador] = new Ficha(fila, colm, pFicha.getJugador());

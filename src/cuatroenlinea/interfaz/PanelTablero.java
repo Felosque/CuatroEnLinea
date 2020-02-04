@@ -5,12 +5,14 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -37,7 +39,7 @@ public class PanelTablero extends JPanel implements ActionListener{
 		botones = new JButton[VideoJuego.MAX_COLUMNAS];
 		for(int i = 0; i < botones.length; i++)
 		{
-			botones[i] = new JButton("Insertar");
+			botones[i] = new JButton();
 			botones[i].addActionListener(this);
 			botones[i].setActionCommand(""+i);
 			add(botones[i]);
@@ -56,6 +58,7 @@ public class PanelTablero extends JPanel implements ActionListener{
 			}
 		}
 		
+		cambiarImagenJugador(ven.vDarJugadorActual());
 		
 	}
 
@@ -64,12 +67,12 @@ public class PanelTablero extends JPanel implements ActionListener{
 		if(pJugador == VideoJuego.JUGADOR_UNO)
 		{
 			fichas[pX][pY].setText("O");
-			fichas[pX][pY].setForeground(Color.RED);
+			fichas[pX][pY].setForeground(new Color(207,66,17));
 		}
 		else
 		{
 			fichas[pX][pY].setText("O");
-			fichas[pX][pY].setForeground(Color.WHITE);
+			fichas[pX][pY].setForeground(new Color(241, 191, 37));
 		}
 		fichas[pX][pY].setFont(new Font("Arial", Font.BOLD,90));
 		fichas[pX][pY].setHorizontalAlignment(JTextField.CENTER);
@@ -78,7 +81,32 @@ public class PanelTablero extends JPanel implements ActionListener{
 	public void colorearFichasGanadoras(Ficha[] pFicha)
 	{
 		for (int i = 0; i < pFicha.length; i++) {
-			fichas[pFicha[i].getPosX()][pFicha[i].getPosY()].setBackground(Color.GREEN);
+			fichas[pFicha[i].getPosX()][pFicha[i].getPosY()].setBackground(new Color(116, 144, 21));
+		}
+	}
+	
+	public void cambiarImagenJugador(int pJugador)
+	{
+		ImageIcon icono;
+		ImageIcon otroicon = null;
+		if(pJugador == 1)
+		{
+			icono = new ImageIcon("img/P1.png");
+			Image img = icono.getImage();
+			Image otraimg = img.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
+			otroicon = new ImageIcon(otraimg);
+		}else
+		{
+			icono = new ImageIcon("img/P2.png");
+			Image img = icono.getImage();
+			Image otraimg = img.getScaledInstance(70,70,java.awt.Image.SCALE_SMOOTH);
+			otroicon = new ImageIcon(otraimg);
+		}
+		
+		for(int i = 0; i < botones.length; i++)
+		{
+			botones[i].setIcon(otroicon);
+			botones[i].repaint();
 		}
 	}
 	
@@ -135,6 +163,7 @@ public class PanelTablero extends JPanel implements ActionListener{
 				JOptionPane.showMessageDialog(this, "¡Ha ganado el jugador " + jugador + "!");
 			}else {
 				ven.vCambiarJugador();
+				cambiarImagenJugador(ven.vDarJugadorActual());
 			}
 		}
 		
