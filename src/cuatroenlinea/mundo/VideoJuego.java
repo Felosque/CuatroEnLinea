@@ -152,8 +152,9 @@ public class VideoJuego {
 		Ficha fich = darPrimeraFichaLateralD(pFicha.getPosX(), pFicha.getPosY());
 		int fila = fich.getPosX(), colm = fich.getPosY();
 		int contador = 0;
-		while(fila != MAX_FILAS-1 && colm != MAX_COLUMNAS-1)
+		while(fila != MAX_FILAS && colm != MAX_COLUMNAS)
 		{
+			System.out.println(fila + "-" +  colm);
 			if(tablero[fila][colm].getJugador() == pFicha.getJugador())
 			{
 				contador++;
@@ -190,7 +191,6 @@ public class VideoJuego {
 		int contador = 0;
 		while(fila != MAX_FILAS && colm != 0)
 		{
-			System.out.println(fila + "-" + colm);
 			if(tablero[fila][colm].getJugador() == pFicha.getJugador())
 			{
 				contador++;
