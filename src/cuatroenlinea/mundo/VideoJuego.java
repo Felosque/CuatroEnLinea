@@ -77,8 +77,8 @@ public class VideoJuego {
 	{
 		if(verificarFilaGanadora(pFicha.getJugador(), pFicha.getPosX())) return true;
 		if(verificarColumnaGanadora(pFicha.getJugador(), pFicha.getPosY())) return true;
-		
-		
+		if(verificarLateralDerecho(pFicha)) return true;
+		if(verificarLateralIzquierdo(pFicha)) return true;
 		return false;
 	}
 	
@@ -102,7 +102,6 @@ public class VideoJuego {
 			}
 			columna++;
 		}
-		
 		return false;
 	}
 	
@@ -116,10 +115,7 @@ public class VideoJuego {
 			if(tablero[fila][pColumna].getJugador() == pJugador)
 			{
 				contador++;
-				if(contador == 4)
-				{
-					return true;
-				}
+				if(contador == 4) return true;
 			}else
 			{
 				contador = 0;
@@ -151,14 +147,61 @@ public class VideoJuego {
 	}
 	
 	
-	public boolean verificarLateralDerecho(int pJugador, int pX, int pY)
+	public boolean verificarLateralDerecho(Ficha pFicha)
 	{
-		
+		Ficha fich = darPrimeraFichaLateralD(pFicha.getPosX(), pFicha.getPosY());
+		int fila = fich.getPosX(), colm = fich.getPosY();
+		int contador = 0;
+		while(fila != MAX_FILAS-1 && colm != MAX_COLUMNAS-1)
+		{
+			if(tablero[fila][colm].getJugador() == pFicha.getJugador())
+			{
+				contador++;
+				if(contador == 4) return true;
+			}
+			else
+			{
+				contador = 0;
+			}
+			fila++; colm++;
+		}
 		return false;
 	}
 	
-	public boolean verificarLateralIzquierdo(int pJugador)
+	public Ficha darPrimeraFichaLateralI(int pX, int pY)
 	{
+		Ficha ficha = new Ficha(0, 0, 0);
+		if( (pX+pY) > MAX_COLUMNAS-1)
+		{
+			ficha.setPosY(6);
+			ficha.setPosX( (pX+pY)- (MAX_COLUMNAS-1));
+		}else
+		{
+			ficha.setPosX(0);
+			ficha.setPosY(pX+pY);
+		}
+		return ficha;
+	}
+	
+	public boolean verificarLateralIzquierdo(Ficha pFicha)
+	{
+		Ficha fich = darPrimeraFichaLateralI(pFicha.getPosX(), pFicha.getPosY());
+		int fila = fich.getPosX(), colm = fich.getPosY();
+		int contador = 0;
+		while(fila != MAX_FILAS && colm != 0)
+		{
+			System.out.println(fila + "-" + colm);
+			if(tablero[fila][colm].getJugador() == pFicha.getJugador())
+			{
+				contador++;
+				if(contador == 4) return true;
+			}
+			else
+			{
+				contador = 0;
+			}
+			fila++; colm--;
+		}
 		return false;
 	}
 
