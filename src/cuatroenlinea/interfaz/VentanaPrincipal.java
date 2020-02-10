@@ -5,6 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
+import cuatroenlinea.mundo.Cliente;
 import cuatroenlinea.mundo.Ficha;
 import cuatroenlinea.mundo.VideoJuego;
 
@@ -16,15 +17,21 @@ public class VentanaPrincipal extends JFrame {
 	
 	private PanelOpciones panelOpciones;
 	
+	private Cliente cliente;
+	
 	public VentanaPrincipal() {
 		
 		videoJuego = new VideoJuego();
+		
+		cliente = new Cliente(videoJuego, this);
 		
 		panelTablero = new PanelTablero(this);
 		add(panelTablero, BorderLayout.CENTER);
 		
 		panelOpciones = new PanelOpciones(this);
 		add(panelOpciones, BorderLayout.SOUTH);
+		
+		
 		
 	}
 	
