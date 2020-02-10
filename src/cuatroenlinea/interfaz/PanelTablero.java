@@ -110,6 +110,19 @@ public class PanelTablero extends JPanel implements ActionListener{
 		}
 	}
 	
+	public void ReiniciarJuego(int pJugador)
+	{
+		cambiarImagenJugador(pJugador);
+		for(int i = 0; i < VideoJuego.MAX_FILAS; i++)
+		{
+			for(int j = 0; j < VideoJuego.MAX_COLUMNAS; j++)
+			{
+				fichas[i][j].setText("");
+				fichas[i][j].setBackground(new Color(0, 68, 95));
+			}
+		}
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		

@@ -14,12 +14,17 @@ public class VentanaPrincipal extends JFrame {
 	
 	private VideoJuego videoJuego;
 	
+	private PanelOpciones panelOpciones;
+	
 	public VentanaPrincipal() {
 		
 		videoJuego = new VideoJuego();
 		
 		panelTablero = new PanelTablero(this);
 		add(panelTablero, BorderLayout.CENTER);
+		
+		panelOpciones = new PanelOpciones(this);
+		add(panelOpciones, BorderLayout.SOUTH);
 		
 	}
 	
@@ -46,6 +51,12 @@ public class VentanaPrincipal extends JFrame {
 	
 	public Ficha[] vDarFichasGanadoras() {
 		return videoJuego.darFichasGanadoras();
+	}
+	
+	public void vReiniciar()
+	{
+		videoJuego.ReiniciarJuego();
+		panelTablero.ReiniciarJuego(videoJuego.darJugadorActual());
 	}
 	
 	public static void main(String[] args) {

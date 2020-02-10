@@ -36,6 +36,19 @@ public class VideoJuego {
 		
 	}
 	
+	public void ReiniciarJuego() {
+		jugadorActual = (int) Math.floor(Math.random()*(2-1+1)+1); 
+		juegoTerminado = false;
+		
+		for(int i = 0; i < MAX_FILAS; i++)
+		{
+			for(int j = 0; j < MAX_COLUMNAS; j++)
+			{
+				tablero[i][j] = new Ficha(i, j, JUGADOR_NULO);
+			}
+		}
+	}
+	
 	public Ficha[] darFichasGanadoras()
 	{
 		return fichasGanadoras;
