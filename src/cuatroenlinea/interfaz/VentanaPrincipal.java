@@ -47,6 +47,11 @@ public class VentanaPrincipal extends JFrame {
 			panelTablero.eliminarFichaAnterior(fichaAnterior.getPosX(), fichaAnterior.getPosY());
 			vCambiarJugador();
 			panelTablero.cambiarImagenJugador(videoJuego.darJugadorActual());
+			if(videoJuego.darFichasGanadoras() != null) { 
+				panelTablero.descolorearFichasGanadoras(videoJuego.darFichasGanadoras());
+				panelTablero.enableBotones();
+				videoJuego.setFichasGanadoras(null);
+			}
 		}catch (Exception e) {
 			JOptionPane.showMessageDialog(this, "No hay jugada anterior");
 		}
@@ -68,6 +73,10 @@ public class VentanaPrincipal extends JFrame {
 	
 	public void vReiniciar()
 	{
+		if(videoJuego.darFichasGanadoras() != null) {
+			panelTablero.descolorearFichasGanadoras(videoJuego.darFichasGanadoras());
+			panelTablero.enableBotones();
+		}
 		videoJuego.ReiniciarJuego();
 		panelTablero.ReiniciarJuego(videoJuego.darJugadorActual());
 	}

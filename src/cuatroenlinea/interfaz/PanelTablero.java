@@ -91,6 +91,13 @@ public class PanelTablero extends JPanel implements ActionListener{
 		}
 	}
 	
+	public void descolorearFichasGanadoras(Ficha[] pFicha)
+	{
+		for (int i = 0; i < pFicha.length; i++) {
+			fichas[pFicha[i].getPosX()][pFicha[i].getPosY()].setBackground(new Color(0, 68, 95));
+		}
+	}
+	
 	public void cambiarImagenJugador(int pJugador)
 	{
 		ImageIcon icono;
@@ -113,6 +120,13 @@ public class PanelTablero extends JPanel implements ActionListener{
 		{
 			botones[i].setIcon(otroicon);
 			botones[i].repaint();
+		}
+	}
+	
+	public void enableBotones() {
+		for(int i = 0; i < botones.length; i++)
+		{
+			botones[i].setEnabled(!botones[i].isEnabled());;
 		}
 	}
 	
@@ -179,11 +193,12 @@ public class PanelTablero extends JPanel implements ActionListener{
 			if(ven.vVerificarJugada(new Ficha(ficha, valor, jugador)))
 			{
 				colorearFichasGanadoras(ven.vDarFichasGanadoras());
+				enableBotones();
 				JOptionPane.showMessageDialog(this, "�Ha ganado el jugador " + jugador + "!");
-			}else {
-				ven.vCambiarJugador();
-				cambiarImagenJugador(ven.vDarJugadorActual());
 			}
+			ven.vCambiarJugador();
+			cambiarImagenJugador(ven.vDarJugadorActual());
+			
 		}
 		
 	}

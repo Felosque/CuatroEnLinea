@@ -24,7 +24,7 @@ public class VideoJuego {
 	
 	public VideoJuego() {
 		
-		fichasGanadoras = new Ficha[4]; 
+		fichasGanadoras = null; 
 		jugadorActual = (int) Math.floor(Math.random()*(2-1+1)+1); 
 		juegoTerminado = false;
 		fichaAnterior = new ArrayList<Ficha>();
@@ -53,6 +53,8 @@ public class VideoJuego {
 	public void ReiniciarJuego() {
 		jugadorActual = (int) Math.floor(Math.random()*(2-1+1)+1); 
 		juegoTerminado = false;
+		fichasGanadoras = null;
+		fichaAnterior.clear();
 		
 		for(int i = 0; i < MAX_FILAS; i++)
 		{
@@ -66,6 +68,10 @@ public class VideoJuego {
 	public Ficha[] darFichasGanadoras()
 	{
 		return fichasGanadoras;
+	}
+	
+	public void setFichasGanadoras(Ficha[] pSet) {
+		fichasGanadoras = pSet;
 	}
 	
 	public void cambiarJugador()
@@ -114,10 +120,12 @@ public class VideoJuego {
 	
 	public boolean verificarJugadaJugador(Ficha pFicha)
 	{
+		fichasGanadoras = new Ficha[4];
 		if(verificarFilaGanadora(pFicha.getJugador(), pFicha.getPosX())) return true;
 		if(verificarColumnaGanadora(pFicha.getJugador(), pFicha.getPosY())) return true;
 		if(verificarLateralDerecho(pFicha)) return true;
 		if(verificarLateralIzquierdo(pFicha)) return true;
+		fichasGanadoras = null;
 		return false;
 	}
 	
