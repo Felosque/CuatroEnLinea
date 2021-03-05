@@ -12,6 +12,8 @@ public class PanelOpciones extends JPanel implements ActionListener {
 	
 	private JButton btReiniciar;
 	
+	private JButton btAtras;
+	
 	private JButton btMenuPrincipal;
 	
 	private VentanaPrincipal ven;
@@ -19,7 +21,7 @@ public class PanelOpciones extends JPanel implements ActionListener {
 	
 	public PanelOpciones(VentanaPrincipal pVen) {
 		
-		setLayout(new GridLayout(1, 2));
+		setLayout(new GridLayout(1, 3));
 		this.ven = pVen;
 		
 		btMenuPrincipal = new JButton("Menu principal");
@@ -31,6 +33,11 @@ public class PanelOpciones extends JPanel implements ActionListener {
 		btReiniciar.setActionCommand("REINICIAR");
 		btReiniciar.addActionListener(this);
 		add(btReiniciar);
+		
+		btAtras = new JButton("Jugada Atrás");
+		btAtras.setActionCommand("ATRAS");
+		btAtras.addActionListener(this);
+		add(btAtras);
 		
 	}
 
@@ -47,6 +54,10 @@ public class PanelOpciones extends JPanel implements ActionListener {
 		else if(commando.equals("REINICIAR"))
 		{
 			ven.vReiniciar();
+		}
+		else if(commando.equals("ATRAS"))
+		{
+			ven.vPonerJugadaAnterior();
 		}
 		
 		

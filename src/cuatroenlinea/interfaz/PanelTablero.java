@@ -26,6 +26,8 @@ public class PanelTablero extends JPanel implements ActionListener{
 
 	private JTextField[][] fichas;
 	
+	private JTextField ultimaJugada = null;
+	
 	private JButton[] botones;
 	
 	private VentanaPrincipal ven;
@@ -62,6 +64,10 @@ public class PanelTablero extends JPanel implements ActionListener{
 		
 	}
 
+	public void eliminarFichaAnterior(int pX, int pY) {
+		fichas[pX][pY].setText("");
+	}
+	
 	public void escribirPanel(int pX, int pY, int pJugador)
 	{
 		if(pJugador == VideoJuego.JUGADOR_UNO)
@@ -173,7 +179,7 @@ public class PanelTablero extends JPanel implements ActionListener{
 			if(ven.vVerificarJugada(new Ficha(ficha, valor, jugador)))
 			{
 				colorearFichasGanadoras(ven.vDarFichasGanadoras());
-				JOptionPane.showMessageDialog(this, "¡Ha ganado el jugador " + jugador + "!");
+				JOptionPane.showMessageDialog(this, "ï¿½Ha ganado el jugador " + jugador + "!");
 			}else {
 				ven.vCambiarJugador();
 				cambiarImagenJugador(ven.vDarJugadorActual());

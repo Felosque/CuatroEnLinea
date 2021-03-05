@@ -16,6 +16,8 @@ public class VideoJuego {
 	
 	private Ficha[] fichasGanadoras;
 	
+	private ArrayList<Ficha> fichaAnterior;
+	
 	private boolean juegoTerminado;
 	
 	public Ficha[][] tablero;
@@ -25,6 +27,7 @@ public class VideoJuego {
 		fichasGanadoras = new Ficha[4]; 
 		jugadorActual = (int) Math.floor(Math.random()*(2-1+1)+1); 
 		juegoTerminado = false;
+		fichaAnterior = new ArrayList<Ficha>();
 		tablero = new Ficha[MAX_FILAS][MAX_COLUMNAS];
 		for(int i = 0; i < MAX_FILAS; i++)
 		{
@@ -34,6 +37,17 @@ public class VideoJuego {
 			}
 		}
 		
+	}
+	
+	public Ficha darFichaAnterior() {
+		if(fichaAnterior.isEmpty()){return null;}
+		return fichaAnterior.get(fichaAnterior.size() - 1);
+	}
+	
+	public void cambiarAJugadaAnterior() {
+		if(darFichaAnterior() != null)
+			tablero[darFichaAnterior().getPosX()][darFichaAnterior().getPosY()].setJugador(JUGADOR_NULO);
+			fichaAnterior.remove(fichaAnterior.size() - 1);
 	}
 	
 	public void ReiniciarJuego() {
@@ -77,6 +91,7 @@ public class VideoJuego {
 		if(tablero[MAX_FILAS-1][pColumna].getJugador() == JUGADOR_NULO)
 		{
 			tablero[MAX_FILAS-1][pColumna].setJugador(pJugador);
+			fichaAnterior.add(tablero[MAX_FILAS-1][pColumna]);
 			return MAX_FILAS-1;
 		}
 		while(fila < MAX_FILAS)
@@ -88,6 +103,7 @@ public class VideoJuego {
 			else
 			{
 				tablero[fila-1][pColumna].setJugador(pJugador);
+				fichaAnterior.add(tablero[fila-1][pColumna]);
 				return fila-1;
 			}
 		}

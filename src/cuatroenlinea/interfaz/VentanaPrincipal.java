@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import cuatroenlinea.mundo.Ficha;
 import cuatroenlinea.mundo.VideoJuego;
@@ -37,6 +38,18 @@ public class VentanaPrincipal extends JFrame {
 	public int vDarJugadorActual()
 	{
 		return videoJuego.darJugadorActual();
+	}
+	
+	public void vPonerJugadaAnterior() {
+		try {
+			Ficha fichaAnterior = videoJuego.darFichaAnterior();
+			videoJuego.cambiarAJugadaAnterior();
+			panelTablero.eliminarFichaAnterior(fichaAnterior.getPosX(), fichaAnterior.getPosY());
+			vCambiarJugador();
+			panelTablero.cambiarImagenJugador(videoJuego.darJugadorActual());
+		}catch (Exception e) {
+			JOptionPane.showMessageDialog(this, "No hay jugada anterior");
+		}
 	}
 	
 	public void vCambiarJugador()
